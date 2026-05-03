@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg</file>
+        <file>icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg</file>
+        <file>icons/ticket-svgrepo-com.svg</file>
+        <file>icons/log-in-svgrepo-com.svg</file>
+        <file>icons/sign-up-svgrepo-com.svg</file>
+        <file>icons/home-svgrepo-com.svg</file>
+        <file>icons/update-alt-2-svgrepo-com.svg</file>
+    </qresource>
+</RCC>

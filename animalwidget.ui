@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AnimalWidget</class>
+ <widget class="QWidget" name="AnimalWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1324</width>
+    <height>789</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="myVLayout">
+     <item>
+      <layout class="QHBoxLayout" name="myHLayout">
+       <item>
+        <widget class="QPushButton" name="btnDelete">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #C62828; 
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+QPushButton:hover {
+    background-color: #E53935;
+}</string>
+         </property>
+         <property name="text">
+          <string>حذف</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icons/icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg</normaloff>:/icons/icons/delete_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnAdd">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #2E7D32; /* لون أخضر داكن للخلفية */
+    color: white;              /* لون النص أبيض */
+    border-radius: 5px;        /* تدوير حواف الزرار */
+    padding: 5px;              /* مساحة داخلية عشان الكلام ميبقاش لازق في الحافة */
+    font-weight: bold;         /* تخنيط الخط */
+}
+
+QPushButton:hover {
+    background-color: #4CAF50; /* لون أخضر فاتح لما الماوس ييجي عليه */
+}</string>
+         </property>
+         <property name="text">
+          <string>إضافة حيوان </string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icons/icons/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg</normaloff>:/icons/icons/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditSearch">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>ابحث عن حيوان...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableAnimals">
+     <property name="styleSheet">
+      <string notr="true">QHeaderView::section {
+    background-color: #333333;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #444444;
+}</string>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+     </property>
+     <column>
+      <property name="text">
+       <string>الرقم</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string> الاسم</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>النوع</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string> العمر</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>الطعام</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string> الحالة الصحية</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string> آخر تغذية</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
