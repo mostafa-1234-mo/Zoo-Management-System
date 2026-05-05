@@ -170,33 +170,36 @@ void TicketWidget::onSellClicked() {
 
         onTicketDetailsChanged();
         // شلنا الـ QMessageBox عشان متزعجش الموظف مع كل تذكرة بيبيعها (اختياري)
-        qDebug() << "✅ تم البيع بنجاح";
+       qDebug() << "✅ Sale completed successfully";
     } else {
-        QMessageBox::warning(this, "فشل الحفظ", "فشل تسجيل التذكرة في قاعدة البيانات.");
+       QMessageBox::warning(this, "Save Failed", "Failed to save the ticket to the database.");
     }
 }
 // 🖨️ دالة الطباعة المحدثة والمؤمنة
 void TicketWidget::onPrintClicked() {
     if (ui->tableTickets->rowCount() == 0) {
-        QMessageBox::warning(this, "تنبيه", "لا توجد تذاكر لطباعتها!");
+        QMessageBox::warning(this, "Warning", "No tickets to print!");
         return;
     }
 
-    // 1. اختيار مكان حفظ الملف
-    QString fileName = QFileDialog::getSaveFileName(this, "حفظ التذكرة كـ PDF",
+    // 1. Choose where to save the file
+    QString fileName = QFileDialog::getSaveFileName(this, "Save Ticket as PDF",
                                                     "Ticket_" + ui->tableTickets->item(0, 0)->text(),
                                                     "PDF Files (*.pdf)");
 
     if (fileName.isEmpty()) return;
 
-    // 2. سحب البيانات من أول صف
+    // 2. Extract data from the first row
     QString id = ui->tableTickets->item(0, 0)->text();
-    QString name = ui->tableTickets->item(0, 1)->text();
-    QString type = ui->tableTickets->item(0, 2)->text();
-    QString price = ui->tableTickets->item(0, 4)->text();
-    QString time = ui->tableTickets->item(0, 5)->text();
+    QString time = ui->tableTickets->item(0, 1)->text();
+    QString name = ui->tableTickets->item(0, 2)->text();
 
-    // 3. إعداد الـ PDF (هنستخدم HTML عشان التنسيق يبقى سهل وشيك)
+
+    QString type = ui->tableTickets->item(0, 3)->text();
+
+    QString price = ui->tableTickets->item(0, 5)->text();
+
+    // 3. Setup PDF (we'll use HTML for easy and elegant formatting)
     QPrinter printer(QPrinter::HighResolution);
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOutputFileName(fileName);
@@ -206,41 +209,42 @@ void TicketWidget::onPrintClicked() {
 
     QTextDocument doc;
 
-    // استخدمت pt بدل px عشان مقاس الطباعة يثبت
+    // Used pt instead of px to keep printing size consistent
     QString html = QString(
-                       "<div style='direction: rtl; text-align: center; border: 8pt solid #2c3e50; padding: 40pt; font-family: Arial;'>"
+                       // Changed direction from rtl to ltr for English text
+                       "<div style='direction: ltr; text-align: center; border: 8pt solid #2c3e50; padding: 40pt; font-family: Arial;'>"
 
-                       // عنوان الحديقة - ضخم (60pt)
-                       "   <h1 style='color: #2c3e50; font-size: 60pt; margin-bottom: 20pt;'>حديقة الحيوان </h1>"
+                       // Zoo Title - Huge (60pt)
+                       "   <h1 style='color: #2c3e50; font-size: 60pt; margin-bottom: 20pt;'>Zoo Park</h1>"
                        "   <div style='border-top: 4pt solid #2c3e50;'></div>"
                        "   <br><br>"
 
-                       // البيانات الأساسية - كبيرة جداً (30pt)
-                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>رقم التذكرة:</b> %1</p>"
-                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>اسم الزائر :</b> %2</p>"
-                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>نوع التذكرة:</b> %3</p>"
+                       // Basic Info - Very Large (30pt)
+                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>Ticket ID:</b> %1</p>"
+                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>Visitor Name:</b> %2</p>"
+                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>Ticket Type:</b> %3</p>"
                        "   <br>"
 
-                       // الإجمالي - عملاق (80pt) في برواز أخضر
+                       // Total - Giant (80pt) in green border
                        "   <div style='background-color: #f4fce3; padding: 30pt; border: 2pt solid #3b6d11;'>"
-                       "       <h2 style='color: #3b6d11; font-size: 80pt; margin: 0;'>الإجمالي: %4</h2>"
+                       "       <h2 style='color: #3b6d11; font-size: 80pt; margin: 0;'>Total: %4</h2>"
                        "   </div>"
                        "   <br><br>"
 
-                       // التذييل
-                       "   <p style='color: #666; font-size: 25pt;'>وقت الإصدار: %5</p>"
+                       // Footer
+                       "   <p style='color: #666; font-size: 25pt;'>Issue Time: %5</p>"
                        "   <br>"
-                       "   <p style='font-size: 30pt; font-weight: bold; color: #2c3e50;'>نتمنى لكم زيارة ممتعة!</p>"
+                       "   <p style='font-size: 30pt; font-weight: bold; color: #2c3e50;'>Enjoy your visit!</p>"
                        "</div>"
                        ).arg(id).arg(name).arg(type).arg(price).arg(time);
 
     doc.setHtml(html);
 
-    // ضبط حجم المستند ليكون متناسب مع الطابعة
+    // Adjust document size to fit the printer
     doc.setPageSize(printer.pageRect(QPrinter::Point).size());
     doc.print(&printer);
 
-    QMessageBox::information(this, "تم", "تم إصدار التذكرة بنجاح بالخط الكبير!");
+    QMessageBox::information(this, "Success", "Ticket printed successfully!");
 }
 
 int TicketWidget::getPriceByIndex(int index) const {
