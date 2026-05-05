@@ -47,7 +47,7 @@ bool Logger::openLogFile()
     QDir dir;
     if (!dir.exists(logDir_)) {
         if (!dir.mkpath(logDir_)) {
-            qDebug() << "فشل إنشاء مجلد logs!";
+            qDebug() << "Failed to create logs folder!";
             return false;
         }
     }
@@ -59,7 +59,7 @@ bool Logger::openLogFile()
     // Append معناها نضيف في آخر الملف مش نمسحه
     logFile_ = new QFile(getTodayFileName());
     if (!logFile_->open(QIODevice::Append | QIODevice::Text)) {
-        qDebug() << "فشل فتح ملف log:"
+        qDebug() << "Failed to open log file:"
                  << logFile_->fileName();
         delete logFile_;
         logFile_ = nullptr;

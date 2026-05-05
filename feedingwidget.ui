@@ -28,7 +28,7 @@
       <item>
        <widget class="QPushButton" name="btnResetFeeding">
         <property name="text">
-         <string>إعادة تعيين (يوم جديد)</string>
+         <string>Reset (New Day)</string>
         </property>
        </widget>
       </item>
@@ -40,7 +40,10 @@
          </font>
         </property>
         <property name="text">
-         <string>0 / 0 حيوانات تغذوا اليوم</string>
+         <string>0 / 0 Animals Fed Today</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -66,37 +69,37 @@
       </property>
       <column>
        <property name="text">
-        <string>الحيوان</string>
+        <string>Animal</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>النوع </string>
+        <string>Species</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>الطعام</string>
+        <string>Food</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>الحالة</string>
+        <string>Health Status</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>آخر تغذية</string>
+        <string>Last Fed</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>تسجيل</string>
+        <string>Record</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>اليوم</string>
+        <string>Date</string>
        </property>
       </column>
      </widget>

@@ -14,7 +14,7 @@ LoginDialog::LoginDialog(UserManager* userManager, DatabaseManager* dbManager, Q
 {
     ui->setupUi(this);
 
-    setWindowTitle("تسجيل الدخول");
+    setWindowTitle("Login");
     setFixedSize(380, 260);
 
     setWindowFlag(Qt::WindowCloseButtonHint, false);
@@ -52,7 +52,7 @@ void LoginDialog::onLoginClicked()
 {
     // 1. صمام أمان للمديرين
     if (userManager_ == nullptr || dbManager_ == nullptr) {
-        LOG_ERROR("خطأ: مؤشر المانجر أو الداتابيز مفقود!");
+        LOG_ERROR("Error: Manager or database pointer is null!");
         return;
     }
 
@@ -60,7 +60,7 @@ void LoginDialog::onLoginClicked()
     QString password = ui->lineEditPassword->text();
 
     if (username.isEmpty() || password.isEmpty()) {
-        ui->labelError->setText("من فضلك أدخل اسم المستخدم وكلمة السر!");
+        ui->labelError->setText("Please enter username and password!");
         ui->labelError->show();
         return;
     }
@@ -69,7 +69,7 @@ void LoginDialog::onLoginClicked()
     const User* user = userManager_->loginUser(username, password);
 
     if (user != nullptr) {
-        LOG_INFO("تسجيل دخول ناجح للمستخدم: " + username);
+        LOG_INFO("Login successful for user: " + username);
 
         // 2. تخزين البيانات في متغيرات الكلاس (عشان الـ main يوصلها)
         this->loggedInUserRole_ = user->getRole();
@@ -80,8 +80,8 @@ void LoginDialog::onLoginClicked()
         accept();
 
     } else {
-        LOG_WARN("محاولة دخول فاشلة للمستخدم: " + username);
-        ui->labelError->setText("اسم المستخدم أو كلمة السر غلط!");
+        LOG_WARN("Failed login attempt for user: " + username);
+        ui->labelError->setText("Incorrect username or password!");
         ui->labelError->show();
         ui->lineEditPassword->clear();
         ui->lineEditPassword->setFocus();

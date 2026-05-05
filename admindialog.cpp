@@ -12,22 +12,22 @@ AdminDialog::AdminDialog(UserManager* userManager,
 {
     ui->setupUi(this);
 
-    setWindowTitle("دخول المدير");
+    setWindowTitle("Admin Login");
     setFixedSize(360, 220);
 
-    // تنسيق رسالة الخطأ
+    // Format error message
     ui->labelAdminError->setStyleSheet(
         "color: #a32d2d; font-size: 12px;"
         );
     ui->labelAdminError->hide();
 
-    /* * 💡 تم مسح كود الـ buttonBox القديم لأنه كان بيعمل المشكلة.
-     * لو إنت ضفت زرار "دخول" في التصميم وسميته مثلا btnLogin،
-     * شيل الشرطتين (//) من السطر اللي تحت عشان يشتغل:
+    /* * 💡 The old buttonBox code was removed because it was causing the issue.
+     * If you added a "Login" button in the UI and named it e.g. btnLogin,
+     * uncomment the line below to make it work:
      */
     // connect(ui->btnLogin, &QPushButton::clicked, this, &AdminDialog::onLoginClicked);
 
-    // ربط زرار Enter من الكيبورد (عشان أول ما يكتب الباسورد ويدوس انتر يدخل على طول)
+    // Connect the Enter key from the keyboard (so it logs in immediately when pressing enter after typing the password)
     connect(ui->lineEditAdminPass,
             &QLineEdit::returnPressed,
             this,
@@ -49,22 +49,22 @@ void AdminDialog::onLoginClicked()
 
     if (password.isEmpty()) {
         ui->labelAdminError->setText(
-            "من فضلك أدخل كلمة سر المدير!");
+            "Please enter the admin password!");
         ui->labelAdminError->show();
         return;
     }
 
     if (userManager_->checkAdminPassword(password)) {
-        // ── سجّل دخول المدير ──────────────────
-        LOG_INFO("تسجيل دخول المدير بنجاح");
+        // ── Log admin login ──────────────────
+        LOG_INFO("Admin logged in successfully");
         accept();
     } else {
-        // ── سجّل محاولة الاختراق ───────────────
-        LOG_WARN("محاولة دخول فاشلة كمدير — "
-                 "كلمة السر غلط");
+        // ── Log failed login attempt ───────────────
+        LOG_WARN("Failed admin login attempt — "
+                 "Incorrect password");
 
         ui->labelAdminError->setText(
-            "كلمة سر المدير غلط!");
+            "Incorrect admin password!");
         ui->labelAdminError->show();
         ui->lineEditAdminPass->clear();
         ui->lineEditAdminPass->setFocus();

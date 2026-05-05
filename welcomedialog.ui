@@ -24,7 +24,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>381</width>
+     <width>411</width>
      <height>271</height>
     </rect>
    </property>
@@ -33,12 +33,12 @@
      <widget class="QLabel" name="labelWelcome">
       <property name="font">
        <font>
-        <pointsize>18</pointsize>
+        <pointsize>14</pointsize>
         <bold>true</bold>
        </font>
       </property>
       <property name="text">
-       <string>🦁 نظام إدارة حديقة الحيوان</string>
+       <string>Zoo Management System 🦁</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -53,7 +53,7 @@
        </font>
       </property>
       <property name="text">
-       <string>اختار طريقة الدخول</string>
+       <string>Choose Login Method</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -65,7 +65,7 @@
       <item>
        <widget class="QPushButton" name="btnRegister">
         <property name="text">
-         <string>إنشاء حساب جديد (مستخدم)</string>
+         <string>Create New Account (User)</string>
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
@@ -82,7 +82,7 @@
       <item>
        <widget class="QPushButton" name="btnLogin">
         <property name="text">
-         <string>تسجيل الدخول (حساب موجود)</string>
+         <string>Login (Existing Account)</string>
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
@@ -99,7 +99,7 @@
       <item>
        <widget class="QPushButton" name="btnAdminLogin">
         <property name="text">
-         <string>دخول المدير</string>
+         <string>Admin Login</string>
         </property>
         <property name="iconSize">
          <size>

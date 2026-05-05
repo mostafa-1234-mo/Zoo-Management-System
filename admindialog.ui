@@ -32,7 +32,7 @@
        </font>
       </property>
       <property name="text">
-       <string>🔐 دخول المدير</string>
+       <string>🔐 Admin Login</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -44,7 +44,7 @@
       <item row="0" column="0">
        <widget class="QLineEdit" name="lineEditAdminPass">
         <property name="placeholderText">
-         <string>أدخل كلمة سر المدير</string>
+         <string>Admin Password</string>
         </property>
        </widget>
       </item>

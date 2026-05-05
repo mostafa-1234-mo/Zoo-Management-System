@@ -32,7 +32,7 @@
        </font>
       </property>
       <property name="text">
-       <string>إنشاء حساب مستخدم جديد</string>
+       <string>Create New Account</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -47,7 +47,7 @@
          <string/>
         </property>
         <property name="placeholderText">
-         <string>الإسم كامل</string>
+         <string>Full Name</string>
         </property>
        </widget>
       </item>
@@ -57,7 +57,7 @@
          <string/>
         </property>
         <property name="placeholderText">
-         <string>اسم المستخدم</string>
+         <string>Username</string>
         </property>
        </widget>
       </item>
@@ -67,7 +67,7 @@
          <string/>
         </property>
         <property name="placeholderText">
-         <string>كلمة السر</string>
+         <string>Password</string>
         </property>
        </widget>
       </item>
@@ -77,7 +77,7 @@
          <string/>
         </property>
         <property name="placeholderText">
-         <string>تأكيد كلمة السر</string>
+         <string>Confirm Password</string>
         </property>
        </widget>
       </item>

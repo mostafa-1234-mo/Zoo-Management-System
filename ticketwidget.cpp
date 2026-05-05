@@ -25,8 +25,8 @@ TicketWidget::TicketWidget(TicketManager* manager, DatabaseManager* dbManager, Q
 
     QStringList headers;
     // الترتيب هنا لازم يطابق الترتيب اللي عملته في الـ Designer بالظبط
-    headers << "رقم التذكرة" << "اليوم" << "اسم الزائر" << "النوع"
-            << "العدد" << "الإجمالي" << "وقت البيع";
+    headers << "Ticket ID" << "Date" << "Visitor Name" << "Type"
+            << "Quantity" << "Total" << "Sale Time";
     ui->tableTickets->setHorizontalHeaderLabels(headers);
 
     // جعل الجدول يملأ المساحة المتاحة
@@ -108,7 +108,7 @@ void TicketWidget::addRowToTable(const Ticket& ticket, int row) {
     ui->tableTickets->setItem(row, 4, createItem(QString::number(ticket.getQuantity())));
 
     // عمود 5: الإجمالي
-    QTableWidgetItem* priceItem = createItem(QString("%L1 ج.م").arg(ticket.getTotalPrice()));
+    QTableWidgetItem* priceItem = createItem(QString("%L1 EGP").arg(ticket.getTotalPrice()));
     priceItem->setForeground(QColor("#3b6d11")); // اللون الأخضر
     ui->tableTickets->setItem(row, 5, priceItem);
 
@@ -122,7 +122,7 @@ void TicketWidget::onTicketDetailsChanged() {
     int qty = ui->spinBoxQty->value();
     int total = getPriceByIndex(index) * qty;
 
-    ui->labelTotal->setText(QString("%L1 ج.م").arg(total));
+    ui->labelTotal->setText(QString("%L1 EGP").arg(total));
     ui->labelTotal->setStyleSheet("color: #3b6d11; font-weight: bold;");
 }
 
@@ -130,7 +130,7 @@ void TicketWidget::onTicketDetailsChanged() {
 void TicketWidget::onSellClicked() {
     // 1. 🛡️ صمامات الأمان
     if (!ticketManager_ || !dbManager_) {
-        QMessageBox::critical(this, "خطأ فني", "تعذر الوصول لمدير البيانات.");
+      QMessageBox::critical(this, "Technical Error", "Unable to access the Database Manager.");
         return;
     }
 
@@ -147,7 +147,7 @@ void TicketWidget::onSellClicked() {
     // 3. الحصول على اسم المستخدم الحالي
     QString currentUser = ticketManager_->getCurrentUsername();
     // 🔍 سطر للطباعة عشان نتأكد إن الاسم مش فاضي وقت البيع
-    qDebug() << "🎟️ جاري البيع بواسطة المستخدم:" << (currentUser.isEmpty() ? "مجهول!" : currentUser);
+    qDebug() << "🎟️ Sale in progress by user:" << (currentUser.isEmpty() ? "Unknown!" : currentUser);
 
     // 4. إصدار التذكرة برمجياً
     TicketType type = getTypeByIndex(ui->comboTicketType->currentIndex());

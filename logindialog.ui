@@ -18,7 +18,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>371</width>
+     <width>374</width>
      <height>251</height>
     </rect>
    </property>
@@ -27,12 +27,12 @@
      <widget class="QLabel" name="labelLogo">
       <property name="font">
        <font>
-        <pointsize>16</pointsize>
+        <pointsize>14</pointsize>
         <bold>true</bold>
        </font>
       </property>
       <property name="text">
-       <string>🦁 نظام إدارة حديقة الحيوان</string>
+       <string>Zoo Management System 🦁</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -44,7 +44,7 @@
       <item row="0" column="0" colspan="2">
        <widget class="QLineEdit" name="lineEditUsername">
         <property name="placeholderText">
-         <string>أدخل اسم المستخدم</string>
+         <string>Username</string>
         </property>
        </widget>
       </item>
@@ -54,14 +54,14 @@
          <enum>QLineEdit::EchoMode::Password</enum>
         </property>
         <property name="placeholderText">
-         <string>أدخل كلمة السر</string>
+         <string>Password</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0" colspan="2">
        <widget class="QPushButton" name="btnLogin">
         <property name="text">
-         <string>دخول</string>
+         <string>Login</string>
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">

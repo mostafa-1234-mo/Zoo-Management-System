@@ -73,10 +73,10 @@ int Ticket::getPrice(TicketType type) {
 
 QString Ticket::typeToString(TicketType type) {
     switch (type) {
-    case TicketType::ADULT:   return "بالغ";
-    case TicketType::CHILD:   return "طفل";
-    case TicketType::FAMILY:  return "عائلة";
-    case TicketType::STUDENT: return "طالب";
-    default:                  return "غير معروف";
+    case TicketType::ADULT:   return "Adult";
+    case TicketType::CHILD:   return "Child";
+    case TicketType::FAMILY:  return "Family";
+    case TicketType::STUDENT: return "Student";
+    default:                  return "Unknown";
     }
 }

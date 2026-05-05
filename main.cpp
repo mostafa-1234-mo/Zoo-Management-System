@@ -19,13 +19,13 @@ int main(int argc, char *argv[])
     Logger::getInstance().setLogDirectory(logsPath);
     Logger::getInstance().openLogFile();
 
-    LOG_INFO("════════════ بدأ البرنامج ════════════");
+    LOG_INFO("════════════ Program Started ════════════");
 
     // 2. إنشاء المانجر في الرام
     DatabaseManager* dbManager = new DatabaseManager();
     if (!dbManager->openDatabase()) {
-        LOG_ERROR("فشل فتح قاعدة البيانات!");
-        QMessageBox::critical(nullptr, "خطأ", "تعذر الاتصال بقاعدة البيانات!");
+        LOG_ERROR("Failed to open database!");
+        QMessageBox::critical(nullptr, "Error", "Could not connect to the database!");
         return -1;
     }
 

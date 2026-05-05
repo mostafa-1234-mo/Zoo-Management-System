@@ -19,8 +19,8 @@ AnimalWidget::AnimalWidget(AnimalManager* manager, DatabaseManager* dbManager, Q
 
     // عناوين الأعمدة
     QStringList headers;
-    headers << "الرقم" << "الاسم" << "النوع"
-            << "العمر" << "الطعام" << "الحالة الصحية" << "آخر تغذية";
+    headers << "ID" << "Name" << "Species"
+            << "Age" << "Diet" << "Health Status" << "Last Fed";
     ui->tableAnimals->setHorizontalHeaderLabels(headers);
 
     // الأعمدة تملا العرض المتاح
@@ -127,7 +127,7 @@ void AnimalWidget::addRowToTable(const Animal& animal, int row)
     // ── عمود 6: وقت آخر تغذية (تعديل التنسيق لـ 12 ساعة) ──
     QString fedTimeText = (animal.getFed() && animal.getLastFedTime().isValid())
                               ? animal.getLastFedTime().toString("hh:mm ap") // 👈 التنسيق الموحد
-                              : "لم يتغذَّ بعد";
+                              : "Not fed yet";
     QTableWidgetItem* timeItem = new QTableWidgetItem(fedTimeText);
     timeItem->setTextAlignment(Qt::AlignCenter);
     ui->tableAnimals->setItem(row, 6, timeItem);
@@ -182,19 +182,19 @@ void AnimalWidget::onAddClicked()
         auto foodResult    = Validator::validateFood(food);
 
         if (!nameResult.isValid) {
-            QMessageBox::warning(this, "خطأ", nameResult.message);
+            QMessageBox::warning(this, "Error", nameResult.message);
             return;
         }
         if (!speciesResult.isValid) {
-            QMessageBox::warning(this, "خطأ", speciesResult.message);
+            QMessageBox::warning(this, "Error", speciesResult.message);
             return;
         }
         if (!ageResult.isValid) {
-            QMessageBox::warning(this, "خطأ", ageResult.message);
+            QMessageBox::warning(this, "Error", ageResult.message);
             return;
         }
         if (!foodResult.isValid) {
-            QMessageBox::warning(this, "خطأ", foodResult.message);
+            QMessageBox::warning(this, "Error", foodResult.message);
             return;
         }
 
@@ -208,7 +208,7 @@ void AnimalWidget::onAddClicked()
             }
         }
         refreshTable();
-        QMessageBox::information(this, "تم", "تمت إضافة الحيوان بنجاح!");
+        QMessageBox::information(this, "Success", "Animal added successfully!");
     }
 }
 
@@ -221,8 +221,8 @@ void AnimalWidget::onDeleteClicked()
     // لو مفيش صف محدد currentRow بترجع -1
     if (selectedRow == -1) {
         QMessageBox::warning(this,
-                             "تنبيه",
-                             "من فضلك اختار حيوان من الجدول الأول!");
+                             "Warning",
+                             "Please select an animal from the first table!");
         return;
     }
 
@@ -240,8 +240,8 @@ void AnimalWidget::onDeleteClicked()
     // اسأل المستخدم يأكد الحذف
     QMessageBox::StandardButton reply = QMessageBox::question(
         this,
-        "تأكيد الحذف",
-        "هل أنت متأكد إنك عايز تحذف " + animalName + "؟",
+        "Confirm Deletion",
+        "Are you sure you want to delete " + animalName + "?",
         QMessageBox::Yes | QMessageBox::No
         );
 
@@ -259,12 +259,12 @@ void AnimalWidget::onDeleteClicked()
             // حدّث الجدول
             refreshTable();
             QMessageBox::information(this,
-                                     "تم",
-                                     "تم حذف " + animalName + " بنجاح!");
+                                     "Success",
+                                     animalName + " has been deleted successfully!");
         } else {
             QMessageBox::critical(this,
-                                  "خطأ",
-                                  "حدث خطأ أثناء الحذف!");
+                                  "Error",
+                                  "An error occurred during deletion!");
         }
     }
 }

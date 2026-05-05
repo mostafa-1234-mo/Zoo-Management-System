@@ -33,10 +33,10 @@ MainWindow::MainWindow(UserRole role, const QString& username, DatabaseManager* 
     ui->setupUi(this);
 
     // 2. إعدادات النافذة (قبل الزحمة)
-    setWindowTitle("نظام إدارة حديقة الحيوان");
+    setWindowTitle("Zoo Management System");
     setMinimumSize(1100, 720);
 
-    LOG_INFO("جاري تهيئة MainWindow للمستخدم: " + currentUserName_);
+    LOG_INFO("Initializing MainWindow for user: " + currentUserName_);
 
     // 3. إنشاء الـ Managers (العقل المحرك)
     animalManager_ = new AnimalManager(this);
@@ -45,7 +45,7 @@ MainWindow::MainWindow(UserRole role, const QString& username, DatabaseManager* 
         ticketManager_ = new TicketManager(dbManager_, this);
         ticketManager_->setCurrentUsername(currentUserName_);
     } else {
-        LOG_ERROR("خطأ: DatabaseManager مبعوت Null!");
+        LOG_ERROR("Error: DatabaseManager passed as null!");
         ticketManager_ = new TicketManager(nullptr, this);
     }
 
@@ -84,31 +84,31 @@ MainWindow::MainWindow(UserRole role, const QString& username, DatabaseManager* 
     connect(refreshTimer_, &QTimer::timeout, this, &MainWindow::onAutoRefresh);
     refreshTimer_->start();
 
-    LOG_INFO("تم تشغيل MainWindow بنجاح.");
+    LOG_INFO("MainWindow initialized successfully.");
 }
 // دالة مساعدة لتنظيم التبويبات (عشان الكود يكون أنظف)
 void MainWindow::setupTabsByRole() {
     if (currentRole_ == UserRole::ADMIN) {
-        tabWidget_->addTab(dashboardWidget_, "📊 لوحة التحكم");
-        tabWidget_->addTab(animalWidget_,    "🐾 الحيوانات");
-        tabWidget_->addTab(feedingWidget_,   "🍏 جدول التغذية");
-        tabWidget_->addTab(reportWidget_,    "📄 التقارير");
-        setWindowTitle("نظام إدارة حديقة الحيوان — (المدير: " + currentUserName_ + ")");
+        tabWidget_->addTab(dashboardWidget_, "📊 Dashboard");
+        tabWidget_->addTab(animalWidget_,    "🐾 Animals");
+        tabWidget_->addTab(feedingWidget_,   "🍏 Feeding Schedule");
+        tabWidget_->addTab(reportWidget_,    "📄 Reports");
+        setWindowTitle("Zoo Management System — (Admin: " + currentUserName_ + ")");
     } else {
-        tabWidget_->addTab(animalWidget_,    "🐾 الحيوانات");
-        tabWidget_->addTab(ticketWidget_,    "🎟️ التذاكر والزوار");
-        setWindowTitle("نظام إدارة حديقة الحيوان — (الموظف: " + currentUserName_ + ")");
+        tabWidget_->addTab(animalWidget_,    "🐾 Animals");
+        tabWidget_->addTab(ticketWidget_,    "🎟️ Tickets & Visitors");
+        setWindowTitle("Zoo Management System — (Employee: " + currentUserName_ + ")");
     }
 }
 // ── Destructor ─────────────────────────────────────────────────
 MainWindow::~MainWindow() {
     if (refreshTimer_) refreshTimer_->stop();
-    LOG_INFO("تم إغلاق MainWindow للمستخدم: " + currentUserName_);
+    LOG_INFO("MainWindow shutdown for user: " + currentUserName_);
     delete ui;
 }
 
 void MainWindow::loadDataFromDatabase() {
-    LOG_INFO("بدء استعادة كل البيانات من القاعدة...");
+    LOG_INFO("Starting to retrieve all data from the database...");
 
     // 1. سحب الحيوانات
     QVector<Animal> savedAnimals = dbManager_->loadAllAnimals();
@@ -137,10 +137,10 @@ void MainWindow::setupStatusBar() {
     statusLabel_->setStyleSheet("color: #555; font-size: 12px; padding: 5px;");
     statusBar()->addPermanentWidget(statusLabel_);
 
-    QString roleText = (currentRole_ == UserRole::ADMIN) ? "مدير" : "موظف";
+   QString roleText = (currentRole_ == UserRole::ADMIN) ? "Admin" : "Employee";
 
     auto updateTime = [this, roleText]() {
-        statusLabel_->setText(QString("👤 المستخدم: %1 | 🔑 الصلاحية: %2 | 🕒 %3")
+        statusLabel_->setText(QString("👤 User: %1 | 🔑 Role: %2 | 🕒 %3")
                                   .arg(currentUserName_)
                                   .arg(roleText)
                                   .arg(QDateTime::currentDateTime().toString("hh:mm:ss AP")));

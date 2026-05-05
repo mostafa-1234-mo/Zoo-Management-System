@@ -50,7 +50,7 @@ DashboardWidget::DashboardWidget(AnimalManager* am, TicketManager* tm, QWidget *
     // ── إعداد جدول آخر التذاكر ──────────────
     ui->tableRecentTickets->setColumnCount(6);
     QStringList headers;
-    headers << "اسم الزائر" << "نوع التذكرة" << "الكمية" << "الإجمالي" << "الوقت" << "اليوم";
+   headers << "Visitor Name" << "Ticket Type" << "Quantity" << "Total" << "Time" << "Date";
     ui->tableRecentTickets->setHorizontalHeaderLabels(headers);
     ui->tableRecentTickets->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableRecentTickets->verticalHeader()->setVisible(false);
@@ -113,7 +113,7 @@ void DashboardWidget::updateFeedingProgress()
     int percentage = (total > 0) ? (fedCount * 100 / total) : 0;
 
     ui->progressDashFeeding->setValue(percentage);
-    ui->labelFeedingDetail->setText(QString("%1 / %2 حيوانات تغذوا اليوم (%3%)").arg(fedCount).arg(total).arg(percentage));
+    ui->labelFeedingDetail->setText(QString("%1 / %2 animals fed today (%3%)").arg(fedCount).arg(total).arg(percentage));
 
     // ستايل شريط التقدم
     QString color = (percentage == 100) ? "#639922" : (percentage >= 50 ? "#ef9f27" : "#e24b4a");

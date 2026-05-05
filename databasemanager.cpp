@@ -37,11 +37,11 @@ bool DatabaseManager::openDatabase()
 
     // 3. محاولة الفتح
     if (!db_.open()) {
-        LOG_ERROR("فشل فتح قاعدة البيانات: " + db_.lastError().text());
+        LOG_ERROR("Failed to open database: " + db_.lastError().text());
         return false;
     }
 
-    LOG_INFO("تم فتح قاعدة البيانات بنجاح: " + dbPath);
+    LOG_INFO("Database opened successfully: " + dbPath);
     return createTables();
 }
 
@@ -157,11 +157,11 @@ bool DatabaseManager::saveTicket(const Ticket& ticket, const QString& currentUse
 
     if (!query.exec()) {
         // لو فشل، هيطبعلك السبب بالظبط في شاشة الـ Output
-        qDebug() << "❌ فشل حفظ التذكرة في الداتابيز:" << query.lastError().text();
+        qDebug() << "❌ Failed to save ticket to database:" << query.lastError().text();
         return false;
     }
 
-    qDebug() << "✅ تم حفظ التذكرة في الداتابيز بنجاح للمستخدم:" << currentUsername;
+    qDebug() << "✅ Ticket saved to database successfully for user:" << currentUsername;
     return true;
 }
 
@@ -173,7 +173,7 @@ QVector<Ticket> DatabaseManager::loadAllTickets(const QString& currentUsername, 
     query.prepare("SELECT * FROM tickets ORDER BY sale_time DESC");
 
     if (!query.exec()) {
-        qDebug() << "❌ فشل سحب التذاكر:" << query.lastError().text();
+        qDebug() << "❌ Failed to fetch tickets:" << query.lastError().text();
         return tickets;
     }
 
@@ -210,9 +210,9 @@ QVector<Ticket> DatabaseManager::getTicketsByDate(QDate from, QDate to, const QS
             QDateTime saleTime = QDateTime::fromString(query.value("sale_time").toString(), "yyyy-MM-dd HH:mm:ss");
 
             TicketType type;
-            if (typeStr == "طفل") type = TicketType::CHILD;
-            else if (typeStr == "عائلة") type = TicketType::FAMILY;
-            else if (typeStr == "طالب") type = TicketType::STUDENT;
+            if (typeStr == "Child") type = TicketType::CHILD;
+            else if (typeStr == "Family") type = TicketType::FAMILY;
+            else if (typeStr == "Student") type = TicketType::STUDENT;
             else type = TicketType::ADULT;
 
             tickets.append(Ticket(id, name, type, qty, saleTime));

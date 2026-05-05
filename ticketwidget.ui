@@ -34,7 +34,7 @@
        <string notr="true"/>
       </property>
       <property name="title">
-       <string>إصدار تذكرة جديدة</string>
+       <string>Issue New Ticket</string>
       </property>
       <widget class="QWidget" name="formLayoutWidget">
        <property name="geometry">
@@ -49,7 +49,7 @@
         <item row="0" column="0">
          <widget class="QLineEdit" name="lineEditVisitorName">
           <property name="placeholderText">
-           <string>الاسم الكامل</string>
+           <string>Full Name</string>
           </property>
          </widget>
         </item>
@@ -60,22 +60,22 @@
           </property>
           <item>
            <property name="text">
-            <string>بالغ - 80 ج.م</string>
+            <string>Adult - 80 EGP</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>طفل - 40 ج.م</string>
+            <string>Child - 40 EGP</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>عائلة - 200 ج.م</string>
+            <string>Family - 200 EGP</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>طالب - 50 ج.م</string>
+            <string>Student - 50 EGP</string>
            </property>
           </item>
          </widget>
@@ -96,7 +96,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="labelTotal">
           <property name="text">
-           <string>80 ج.م</string>
+           <string>Adult - 80 EGP</string>
           </property>
          </widget>
         </item>
@@ -117,7 +117,7 @@ QPushButton:hover {
 }</string>
           </property>
           <property name="text">
-           <string>بيع التذكرة</string>
+           <string>Sell Ticket</string>
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
@@ -177,37 +177,37 @@ QPushButton:hover {
        </property>
        <column>
         <property name="text">
-         <string>رقم التذكرة</string>
+         <string>Ticket ID</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>اليوم</string>
+         <string>Date</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>اسم الزائر</string>
+         <string>Visitor Name</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>النوع</string>
+         <string>Ticket Type</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>العدد</string>
+         <string>Quantity</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>الإجمالي</string>
+         <string>Total</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>وقت البيع</string>
+         <string>Sale Time</string>
         </property>
        </column>
       </widget>
@@ -225,7 +225,7 @@ padding: 10px;
 font-weight: bold;</string>
         </property>
         <property name="text">
-         <string>طباعة التذكرة 🖨️</string>
+         <string>Print Ticket 🖨️</string>
         </property>
        </widget>
       </item>

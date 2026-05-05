@@ -28,7 +28,7 @@
       <item>
        <widget class="QPushButton" name="btnFilter">
         <property name="text">
-         <string>تصفية</string>
+         <string>Filter</string>
         </property>
        </widget>
       </item>
@@ -49,7 +49,7 @@
       <item>
        <widget class="QPushButton" name="btnRefresh">
         <property name="text">
-         <string>تحديث</string>
+         <string>Refresh</string>
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
@@ -61,17 +61,17 @@
        <widget class="QComboBox" name="comboChartType">
         <item>
          <property name="text">
-          <string>إيراد التذاكر</string>
+          <string>Ticket Revenue</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>عدد الزوار</string>
+          <string>Number of Visitors</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>توزيع أنواع التذاكر</string>
+          <string>Ticket Types Distribution</string>
          </property>
         </item>
        </widget>
@@ -79,7 +79,7 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>عرض:</string>
+         <string>View</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignCenter</set>

@@ -7,23 +7,23 @@ ValidationResult Validator::validateName(const QString& name)
     QString trimmed = name.trimmed();
 
     if (trimmed.isEmpty())
-        return ValidationResult::fail("الاسم لا يمكن أن يكون فارغاً!");
+        return ValidationResult::fail("Name cannot be empty!");
 
     if (trimmed.length() < 2)
         return ValidationResult::fail(
-            "الاسم لازم يكون حرفين على الأقل!");
+            "Name must be at least 2 characters long!");
 
     if (trimmed.length() > 50)
         return ValidationResult::fail(
-            "الاسم لا يمكن أن يتجاوز 50 حرفاً!");
+            "Name cannot exceed 50 characters!");
 
-    // نتحقق إن الاسم مش بيحتوي أرقام أو رموز
-    // \p{L} معناها أي حرف من أي لغة (عربي أو إنجليزي)
-    // \s معناها مسافة
+    // Check that the name doesn't contain numbers or symbols
+    // \p{L} means any letter from any language
+    // \s means space
     QRegularExpression nameRegex(R"(^[\p{L}\s]+$)");
     if (!nameRegex.match(trimmed).hasMatch())
         return ValidationResult::fail(
-            "الاسم لا يجب أن يحتوي على أرقام أو رموز!");
+            "Name must not contain numbers or symbols!");
 
     return ValidationResult::ok();
 }
@@ -34,27 +34,27 @@ ValidationResult Validator::validateUsername(
 {
     if (username.isEmpty())
         return ValidationResult::fail(
-            "اسم المستخدم لا يمكن أن يكون فارغاً!");
+            "Username cannot be empty!");
 
     if (username.length() < 4)
         return ValidationResult::fail(
-            "اسم المستخدم لازم يكون 4 حروف على الأقل!");
+            "Username must be at least 4 characters long!");
 
     if (username.length() > 20)
         return ValidationResult::fail(
-            "اسم المستخدم لا يمكن أن يتجاوز 20 حرفاً!");
+            "Username cannot exceed 20 characters!");
 
-    // حروف إنجليزية صغيرة وكبيرة وأرقام وـ underscore بس
+    // Only English letters (lower/upper), numbers, and underscore
     QRegularExpression usernameRegex(R"(^[a-zA-Z0-9_]+$)");
     if (!usernameRegex.match(username).hasMatch())
         return ValidationResult::fail(
-            "اسم المستخدم يجب أن يحتوي على حروف إنجليزية "
-            "وأرقام و _ فقط!");
+            "Username must contain only English letters, "
+            "numbers, and _!");
 
-    // مش يبدأ برقم
+    // Must not start with a number
     if (username[0].isDigit())
         return ValidationResult::fail(
-            "اسم المستخدم لا يجب أن يبدأ برقم!");
+            "Username must not start with a number!");
 
     return ValidationResult::ok();
 }
@@ -65,21 +65,21 @@ ValidationResult Validator::validatePassword(
 {
     if (password.isEmpty())
         return ValidationResult::fail(
-            "كلمة السر لا يمكن أن تكون فارغة!");
+            "Password cannot be empty!");
 
     if (password.length() < 6)
         return ValidationResult::fail(
-            "كلمة السر لازم تكون 6 حروف على الأقل!");
+            "Password must be at least 6 characters long!");
 
     if (password.length() > 50)
         return ValidationResult::fail(
-            "كلمة السر لا يمكن أن تتجاوز 50 حرفاً!");
+            "Password cannot exceed 50 characters!");
 
-    // نتحقق إن فيها حرف كبير على الأقل
+    // Check for at least one uppercase letter
     bool hasUpper = false;
-    // نتحقق إن فيها حرف صغير على الأقل
+    // Check for at least one lowercase letter
     bool hasLower = false;
-    // نتحقق إن فيها رقم على الأقل
+    // Check for at least one digit
     bool hasDigit = false;
 
     for (const QChar& c : password) {
@@ -90,15 +90,15 @@ ValidationResult Validator::validatePassword(
 
     if (!hasUpper)
         return ValidationResult::fail(
-            "كلمة السر لازم تحتوي على حرف كبير على الأقل!");
+            "Password must contain at least one uppercase letter!");
 
     if (!hasLower)
         return ValidationResult::fail(
-            "كلمة السر لازم تحتوي على حرف صغير على الأقل!");
+            "Password must contain at least one lowercase letter!");
 
     if (!hasDigit)
         return ValidationResult::fail(
-            "كلمة السر لازم تحتوي على رقم على الأقل!");
+            "Password must contain at least one digit!");
 
     return ValidationResult::ok();
 }
@@ -110,11 +110,11 @@ ValidationResult Validator::validatePasswordConfirm(
 {
     if (confirm.isEmpty())
         return ValidationResult::fail(
-            "من فضلك أكّد كلمة السر!");
+            "Please confirm the password!");
 
     if (password != confirm)
         return ValidationResult::fail(
-            "كلمة السر وتأكيد كلمة السر غير متطابقين!");
+            "Passwords do not match!");
 
     return ValidationResult::ok();
 }
@@ -127,21 +127,21 @@ ValidationResult Validator::validateSpecies(
 
     if (trimmed.isEmpty())
         return ValidationResult::fail(
-            "نوع الحيوان لا يمكن أن يكون فارغاً!");
+            "Animal species cannot be empty!");
 
     if (trimmed.length() < 2)
         return ValidationResult::fail(
-            "نوع الحيوان لازم يكون حرفين على الأقل!");
+            "Animal species must be at least 2 characters long!");
 
     if (trimmed.length() > 30)
         return ValidationResult::fail(
-            "نوع الحيوان لا يمكن أن يتجاوز 30 حرفاً!");
+            "Animal species cannot exceed 30 characters!");
 
-    // حروف عربية أو إنجليزية ومسافات بس
+    // Letters and spaces only
     QRegularExpression speciesRegex(R"(^[\p{L}\s]+$)");
     if (!speciesRegex.match(trimmed).hasMatch())
         return ValidationResult::fail(
-            "نوع الحيوان يجب أن يحتوي على حروف فقط!");
+            "Animal species must contain only letters!");
 
     return ValidationResult::ok();
 }
@@ -153,15 +153,15 @@ ValidationResult Validator::validateFood(const QString& food)
 
     if (trimmed.isEmpty())
         return ValidationResult::fail(
-            "نوع الطعام لا يمكن أن يكون فارغاً!");
+            "Food type cannot be empty!");
 
     if (trimmed.length() < 3)
         return ValidationResult::fail(
-            "وصف الطعام لازم يكون 3 حروف على الأقل!");
+            "Food description must be at least 3 characters long!");
 
     if (trimmed.length() > 100)
         return ValidationResult::fail(
-            "وصف الطعام لا يمكن أن يتجاوز 100 حرف!");
+            "Food description cannot exceed 100 characters!");
 
     return ValidationResult::ok();
 }
@@ -171,11 +171,11 @@ ValidationResult Validator::validateAge(int age)
 {
     if (age < 0)
         return ValidationResult::fail(
-            "العمر لا يمكن أن يكون أقل من صفر!");
+            "Age cannot be less than zero!");
 
     if (age > 100)
         return ValidationResult::fail(
-            "العمر لا يمكن أن يتجاوز 100 سنة!");
+            "Age cannot exceed 100 years!");
 
     return ValidationResult::ok();
 }
@@ -185,11 +185,11 @@ ValidationResult Validator::validateQuantity(int qty)
 {
     if (qty < 1)
         return ValidationResult::fail(
-            "العدد لازم يكون 1 على الأقل!");
+            "Quantity must be at least 1!");
 
     if (qty > 20)
         return ValidationResult::fail(
-            "العدد لا يمكن أن يتجاوز 20 تذكرة!");
+            "Quantity cannot exceed 20 tickets!");
 
     return ValidationResult::ok();
 }
@@ -198,7 +198,7 @@ ValidationResult Validator::validateQuantity(int qty)
 void Validator::applyStyle(QLineEdit* field, bool isValid)
 {
     if (isValid) {
-        // أخضر فاتح لما البيانات صح
+        // Light green when data is valid
         field->setStyleSheet(
             "QLineEdit {"
             "  border: 1.5px solid #639922;"
@@ -208,7 +208,7 @@ void Validator::applyStyle(QLineEdit* field, bool isValid)
             "}"
             );
     } else {
-        // أحمر فاتح لما البيانات غلط
+        // Light red when data is invalid
         field->setStyleSheet(
             "QLineEdit {"
             "  border: 1.5px solid #e24b4a;"

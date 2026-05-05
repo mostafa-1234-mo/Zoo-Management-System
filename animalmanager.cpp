@@ -37,9 +37,9 @@ void AnimalManager::addAnimal(const QString& name, const QString& species,
     query.bindValue(":image_path", imagePath);
 
     if (!query.exec()) {
-        LOG_ERROR("❌ فشل الحفظ في الداتابيز: " + query.lastError().text());
+        LOG_ERROR("❌ Failed to save to database: " + query.lastError().text());
     } else {
-        LOG_INFO("✅ تم الحفظ بنجاح لـ: " + name);
+        LOG_INFO("✅ Successfully saved: " + name);
     }
 }
 

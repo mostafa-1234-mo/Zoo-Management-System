@@ -16,7 +16,7 @@ AddAnimalDialog::AddAnimalDialog(QWidget* parent)
 
 
     // عنوان الـ dialog
-    setWindowTitle("إضافة حيوان جديد");
+    setWindowTitle("Add New Animal");
 
     // حجم ثابت للـ dialog — مش هيتكبر أو يتصغر
     setFixedSize(400, 280);
@@ -123,7 +123,7 @@ void AddAnimalDialog::onFoodChanged(const QString& text)
 void AddAnimalDialog::on_btnChooseImage_clicked()
 {
     // 1. فتح شاشة اختيار الصورة
-    QString sourcePath = QFileDialog::getOpenFileName(this, "اختار صورة", "", "Images (*.png *.jpg *.jpeg)");
+    QString sourcePath = QFileDialog::getOpenFileName(this, "Add Image", "", "Images (*.png *.jpg *.jpeg)");
 
     if (!sourcePath.isEmpty()) {
         // 2. تحديد مسار البرنامج لإنشاء فولدر الصور

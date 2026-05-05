@@ -22,8 +22,8 @@ FeedingWidget::FeedingWidget(AnimalManager* animalManager,
 
     QStringList headers;
     // الترتيب هنا لازم يطابق الـ UI اللي في الـ Designer بالظبط
-    headers << "الحيوان" << "النوع" << "الطعام"
-            << "الحالة" << "آخر تغذية" << "تسجيل" << "اليوم";
+    headers << "Animal" << "Species" << "Food"
+            << "Status" << "Last Fed" << "Record" << "Date";
     ui->tableFeeding->setHorizontalHeaderLabels(headers);
 
     ui->tableFeeding->horizontalHeader()
@@ -117,11 +117,11 @@ void FeedingWidget::addRowToTable(const Animal& animal, int row)
     // عمود 5: زرار التسجيل (كما هو)
     QPushButton* btnFeed = new QPushButton();
     if (animal.getFed()) {
-        btnFeed->setText("مكتمل");
+        btnFeed->setText("Completed");
         btnFeed->setEnabled(false);
         btnFeed->setStyleSheet("background: #f0f0f0; color: #999; border-radius: 4px;");
     } else {
-        btnFeed->setText("تسجيل التغذية");
+        btnFeed->setText("Record Feeding");
         btnFeed->setStyleSheet("background: #e6f1fb; color: #185fa5; border-radius: 4px; border: 1px solid #b5d4f4;");
 
         int id = animal.getId();
@@ -195,7 +195,7 @@ void FeedingWidget::updateSummary()
     int fed = 0;
     for (const Animal& a : animals) if (a.getFed()) fed++;
 
-    ui->labelFedSummary->setText(QString("%1 / %2 حيوانات تم إطعامهم").arg(fed).arg(total));
+    ui->labelFedSummary->setText(QString("%1 / %2 animals fed").arg(fed).arg(total));
 
     int percent = (total > 0) ? (fed * 100 / total) : 0;
     ui->progressFeeding->setValue(percent);
@@ -211,7 +211,7 @@ void FeedingWidget::checkAlerts()
     if (hungry.isEmpty()) {
         ui->labelAlert->hide();
     } else {
-        ui->labelAlert->setText("⚠ تنبيه: لم يتم إطعام ( " + hungry.join(", ") + " )");
+        ui->labelAlert->setText("⚠ Alert:have not been fed ( " + hungry.join(", ") + " )");
         ui->labelAlert->show();
     }
 }

@@ -13,7 +13,7 @@ RegisterDialog::RegisterDialog(UserManager* userManager,
 {
     ui->setupUi(this);
 
-    setWindowTitle("إنشاء حساب جديد");
+    setWindowTitle("Create New Account");
     setFixedSize(400, 320);
 
     // تنسيق رسالة الخطأ
@@ -92,7 +92,7 @@ QString RegisterDialog::validateInputs() const
     // التحقق إن الـ username مش موجود
     if (userManager_->usernameExists(
             ui->lineEditUsername->text()))
-        return "اسم المستخدم ده موجود بالفعل!";
+      return "Username already exists!";
 
     return ""; // كل حاجة تمام
 }
@@ -172,22 +172,22 @@ void RegisterDialog::onRegisterClicked()
         fullName, username, password);
 
     if (success) {
-        // ── سجّل إنشاء الحساب ─────────────────
-        LOG_INFO("تم إنشاء حساب جديد: " + username +
+        // ── Log account creation ─────────────────
+        LOG_INFO("New account created: " + username +
                  " (" + fullName + ")");
 
         QMessageBox::information(
-            this, "تم إنشاء الحساب",
-            "تم إنشاء حسابك بنجاح!\n"
-            "اسم المستخدم: " + username
+            this, "Account Created",
+            "Your account has been created successfully!\n"
+            "Username: " + username
             );
         accept();
     } else {
-        LOG_WARN("فشل إنشاء حساب: " + username +
-                 " — اسم المستخدم موجود بالفعل");
+        LOG_WARN("Failed to create account: " + username +
+                 " — Username already exists");
 
         ui->labelRegError->setText(
-            "حدث خطأ أثناء إنشاء الحساب!");
+            "An error occurred while creating the account!");
         ui->labelRegError->show();
     }
 }

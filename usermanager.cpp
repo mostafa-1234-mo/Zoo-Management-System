@@ -33,8 +33,8 @@ void UserManager::loadUsersFromDatabase()
             ));
     }
 
-    qDebug() << "تم تحميل" << users_.size()
-             << "مستخدمين من قاعدة البيانات";
+    qDebug() << "Loaded" << users_.size()
+             << "users from the database";
 }
 
 // ── registerUser ───────────────────────────────────────────────

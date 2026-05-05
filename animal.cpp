@@ -36,15 +36,15 @@ void Animal::setFood(const QString& food) {
 // ── Helpers ──────────────────────────────
 QString Animal::healthToString() const {
     switch (health_) {
-    case HealthStatus::OK:       return "جيدة";
-    case HealthStatus::WARNING:  return "تحتاج متابعة";
-    case HealthStatus::CRITICAL: return "حرجة";
+    case HealthStatus::OK:       return "Good";
+    case HealthStatus::WARNING:  return "Needs Monitoring";
+    case HealthStatus::CRITICAL: return "Critical";
     }
-    return "جيدة";
+    return "Good";
 }
 
 QString Animal::toQString() const {
-    return QString("(%1) %2 — %3 — عمره %4 سنوات — صحته: %5")
+    return QString("(%1) %2 — %3 — Age: %4 years — Health: %5")
         .arg(id_)
         .arg(name_)
         .arg(species_)

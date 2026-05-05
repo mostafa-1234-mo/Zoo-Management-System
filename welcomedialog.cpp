@@ -13,7 +13,7 @@ WelcomeDialog::WelcomeDialog(UserManager* userManager, DatabaseManager* dbManage
 {
    ui->setupUi(this);
 
-    setWindowTitle("أهلاً بك");
+   setWindowTitle("Welcome");
     setFixedSize(400, 300);
 
     // مش هيظهر زرار الإغلاق

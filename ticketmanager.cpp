@@ -27,12 +27,11 @@ Ticket TicketManager::sellTicket(const QString& visitorName,
     }
 
     // ── سجل عملية البيع ──
-    LOG_INFO("تم بيع تذكرة — الزائر: " + visitorName +
-             " | النوع: " + t.typeToString() +
-             " | العدد: " + QString::number(quantity) +
-             " | الإجمالي: " +
-             QString::number(t.getTotalPrice()) + " ج.م");
-
+    LOG_INFO("Ticket sold — Visitor: " + visitorName +
+             " | Type: " + t.typeToString() +
+             " | Quantity: " + QString::number(quantity) +
+             " | Total: " +
+             QString::number(t.getTotalPrice()) + " EGP");
     return t;
 }
 

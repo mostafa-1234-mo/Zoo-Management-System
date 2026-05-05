@@ -32,7 +32,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>حذف</string>
+          <string>Delete</string>
          </property>
          <property name="icon">
           <iconset resource="resources.qrc">
@@ -56,7 +56,7 @@ QPushButton:hover {
 }</string>
          </property>
          <property name="text">
-          <string>إضافة حيوان </string>
+          <string>Add Animal</string>
          </property>
          <property name="icon">
           <iconset resource="resources.qrc">
@@ -70,7 +70,7 @@ QPushButton:hover {
           <string/>
          </property>
          <property name="placeholderText">
-          <string>ابحث عن حيوان...</string>
+          <string>Search for an animal....</string>
          </property>
         </widget>
        </item>
@@ -99,37 +99,37 @@ QPushButton:hover {
      </property>
      <column>
       <property name="text">
-       <string>الرقم</string>
+       <string>ID</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string> الاسم</string>
+       <string>Name</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>النوع</string>
+       <string>Species</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string> العمر</string>
+       <string>Age</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>الطعام</string>
+       <string>Food</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string> الحالة الصحية</string>
+       <string>Health Status</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string> آخر تغذية</string>
+       <string>Last Fed</string>
       </property>
      </column>
     </widget>

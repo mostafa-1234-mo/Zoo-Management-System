@@ -25,7 +25,7 @@
         </font>
        </property>
        <property name="text">
-        <string>لوحة التحكم الرئيسية</string>
+        <string>Main Dashboard</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -69,7 +69,7 @@
                </font>
               </property>
               <property name="text">
-               <string>إجمالي الحيوانات</string>
+               <string>Total Animals</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -116,7 +116,7 @@
                </font>
               </property>
               <property name="text">
-               <string>زوار اليوم</string>
+               <string>Today's Visitors</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -163,7 +163,7 @@
                </font>
               </property>
               <property name="text">
-               <string>الإيراد (ج.م)</string>
+               <string>Revenue (EGP)</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -210,7 +210,7 @@
                </font>
               </property>
               <property name="text">
-               <string>تغذوا اليوم</string>
+               <string>Fed Today</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -227,7 +227,7 @@
      <item>
       <widget class="QGroupBox" name="groupFeedingProgress">
        <property name="title">
-        <string>تقدم التغذية اليومية</string>
+        <string>Daily Feeding Progress</string>
        </property>
        <widget class="QWidget" name="verticalLayoutWidget_6">
         <property name="geometry">
@@ -252,7 +252,7 @@
          <item>
           <widget class="QLabel" name="labelFeedingDetail">
            <property name="text">
-            <string>0 / 0 حيوانات</string>
+            <string>0 / 0 Animals</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -266,7 +266,7 @@
      <item>
       <widget class="QGroupBox" name="groupRecentTickets">
        <property name="title">
-        <string>آخر 5 تذاكر مباعة</string>
+        <string>Last 5 Tickets Sold</string>
        </property>
        <widget class="QTableWidget" name="tableRecentTickets">
         <property name="geometry">
@@ -288,32 +288,32 @@
         </property>
         <column>
          <property name="text">
-          <string>اسم الزائر</string>
+          <string>Visitor Name</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>نوع التذكرة</string>
+          <string>Ticket Type</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>الكمية</string>
+          <string>Quantity</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>الإجمالي</string>
+          <string>Total</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>الوقت</string>
+          <string>Time</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>اليوم</string>
+          <string>Date</string>
          </property>
         </column>
        </widget>
