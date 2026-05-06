@@ -10,6 +10,7 @@
 #include <QPainter>
 #include <QFileDialog>
 #include <QTextDocument>
+#include <QDateTime>
 
 
 
@@ -189,54 +190,95 @@ void TicketWidget::onPrintClicked() {
 
     if (fileName.isEmpty()) return;
 
-    // 2. Extract data from the first row
-    QString id = ui->tableTickets->item(0, 0)->text();
-    QString time = ui->tableTickets->item(0, 1)->text();
-    QString name = ui->tableTickets->item(0, 2)->text();
+    // 2. Extract data from the first row (with adjusted numbers based on our previous deduction)
+    QString id = ui->tableTickets->item(0, 0)->text();    // Ticket ID
+    QString name = ui->tableTickets->item(0, 2)->text();  // Name
+    QString type = ui->tableTickets->item(0, 3)->text();  // Type (assuming it's in column 3)
+    QString price = ui->tableTickets->item(0, 5)->text(); // Total
 
+    QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm AP");
 
-    QString type = ui->tableTickets->item(0, 3)->text();
-
-    QString price = ui->tableTickets->item(0, 5)->text();
-
-    // 3. Setup PDF (we'll use HTML for easy and elegant formatting)
+    // 3. Setup PDF
     QPrinter printer(QPrinter::HighResolution);
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOutputFileName(fileName);
-    printer.setPageMargins(QMarginsF(15, 15, 15, 15));
-
-
+    // Reduce margins to expand design area
+    printer.setPageMargins(QMarginsF(10, 10, 10, 10));
 
     QTextDocument doc;
 
-    // Used pt instead of px to keep printing size consistent
+    // 4. Professional HTML design for the ticket
     QString html = QString(
-                       // Changed direction from rtl to ltr for English text
-                       "<div style='direction: ltr; text-align: center; border: 8pt solid #2c3e50; padding: 40pt; font-family: Arial;'>"
+                       "<div style='background-color: #f4f1e1; padding: 20px; font-family: Arial, sans-serif; direction: ltr;'>"
 
-                       // Zoo Title - Huge (60pt)
-                       "   <h1 style='color: #2c3e50; font-size: 60pt; margin-bottom: 20pt;'>Zoo Park</h1>"
-                       "   <div style='border-top: 4pt solid #2c3e50;'></div>"
-                       "   <br><br>"
+                       // Main ticket container (table to split ticket and verification part)
+                       "   <table width='100%' style='border-collapse: collapse; border: 2px solid #2c3e50; background-color: #ffffff;'>"
+                       "       <tr>"
 
-                       // Basic Info - Very Large (30pt)
-                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>Ticket ID:</b> %1</p>"
-                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>Visitor Name:</b> %2</p>"
-                       "   <p style='font-size: 30pt; margin: 20pt 0;'><b>Ticket Type:</b> %3</p>"
-                       "   <br>"
+                       // ================= Left Section (Main Ticket) =================
+                       "           <td width='70%' style='padding: 0; vertical-align: top;'>"
 
-                       // Total - Giant (80pt) in green border
-                       "   <div style='background-color: #f4fce3; padding: 30pt; border: 2pt solid #3b6d11;'>"
-                       "       <h2 style='color: #3b6d11; font-size: 80pt; margin: 0;'>Total: %4</h2>"
-                       "   </div>"
-                       "   <br><br>"
+                       // Header (Blue ticket header)
+                       "               <div style='background-color: #1a2b40; color: #ffffff; text-align: center; padding: 25px;'>"
+                       "                   <h1 style='margin: 0; font-size: 45pt;'>National Zoo</h1>"
+                       "                   <p style='margin: 10px 0 0 0; font-size: 20pt; color: #e6e6e6;'>Entry Ticket</p>"
+                       "               </div>"
 
-                       // Footer
-                       "   <p style='color: #666; font-size: 25pt;'>Issue Time: %5</p>"
-                       "   <br>"
-                       "   <p style='font-size: 30pt; font-weight: bold; color: #2c3e50;'>Enjoy your visit!</p>"
+                       // Ticket content
+                       "               <div style='padding: 20px;'>"
+
+                       // Ticket data block
+                       "                   <h3 style='color: #2c3e50; font-size: 22pt; margin-bottom: 10px; border-bottom: 2px solid #eee; padding-bottom: 5px;'>Ticket Details</h3>"
+                       "                   <table width='100%' style='background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd;'>"
+                       "                       <tr>"
+                       "                           <td width='50%' style='font-size: 18pt; padding: 10px;'><b>Ticket ID:</b> %1</td>"
+                       "                           <td width='50%' style='font-size: 18pt; padding: 10px;'><b>Ticket Type:</b> %3</td>"
+                       "                       </tr>"
+                       "                       <tr>"
+                       "                           <td colspan='2' style='font-size: 18pt; padding: 10px;'><b>Visitor Name:</b> %2</td>"
+                       "                       </tr>"
+                       "                   </table>"
+                       "                   <br>"
+
+                       // Visit data block
+                       "                   <h3 style='color: #2c3e50; font-size: 22pt; margin-bottom: 10px; border-bottom: 2px solid #eee; padding-bottom: 5px;'>Visit Details</h3>"
+                       "                   <div style='background-color: #f9f9f9; padding: 15px; border: 1px solid #ddd; font-size: 18pt;'>"
+                       "                       <b>Issue Date and Time:</b> %4"
+                       "                   </div>"
+                       "                   <br><br>"
+
+                       // Total (Green box)
+                       "                   <div style='background-color: #1e4620; color: #ffffff; text-align: center; padding: 25px; border: 4px double #ffffff; outline: 2px solid #1e4620;'>"
+                       "                       <h2 style='margin: 0; font-size: 50pt;'>Total: %5</h2>"
+                       "                   </div>"
+
+                       // Welcome message
+                       "                   <div style='text-align: center; margin-top: 30px;'>"
+                       "                       <p style='color: #2c3e50; font-size: 20pt; font-weight: bold;'>Enjoy your visit!</p>"
+                       "                   </div>"
+
+                       "               </div>" // End of ticket content
+                       "           </td>"
+
+                       // ================= Right Section (Ticket Stub / Verification Part) =================
+                       "           <td width='30%' style='border-left: 4px dashed #ccc; padding: 20px; background-color: #f4f1e1; vertical-align: top; text-align: center;'>"
+                       "               <br><br>"
+                       "               <h3 style='color: #1a2b40; font-size: 20pt; margin-bottom: 30px;'>Verification Stub<br>Entry Ticket</h3>"
+                       "               <div style='font-size: 14pt; color: #333; line-height: 2.0; text-align: left; padding-left: 5px;'>"
+                       "                   <b>ID:</b> %1<br>"
+                       "                   <b>Name:</b> %2<br>"
+                       "                   <b>Time:</b> %4"
+                       "               </div>"
+                       "               <br><br><br><br>"
+                       "               <div style='width: 80px; height: 80px; border: 2px solid #1a2b40; margin: 0 auto; display: inline-block;'>"
+                       "                   <p style='font-size: 10pt; margin-top: 30px;'>Stamp/QR</p>"
+                       "               </div>"
+                       "           </td>"
+
+                       "       </tr>"
+                       "   </table>"
                        "</div>"
-                       ).arg(id).arg(name).arg(type).arg(price).arg(time);
+                       ).arg(id).arg(name).arg(type).arg(time).arg(price);
 
     doc.setHtml(html);
 
@@ -244,7 +286,7 @@ void TicketWidget::onPrintClicked() {
     doc.setPageSize(printer.pageRect(QPrinter::Point).size());
     doc.print(&printer);
 
-    QMessageBox::information(this, "Success", "Ticket printed successfully!");
+    QMessageBox::information(this, "Success", "Ticket issued successfully with the new design!");
 }
 
 int TicketWidget::getPriceByIndex(int index) const {
