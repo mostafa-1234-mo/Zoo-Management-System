@@ -5,7 +5,7 @@
 #include <QVector>
 #include <QMap>
 
-class MainWindow; // 1. إضافة الإعلان المُسبق للنافذة هنا
+class MainWindow;
 
 class AnimalManager {
 private:

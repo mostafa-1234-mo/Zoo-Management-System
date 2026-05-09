@@ -169,7 +169,6 @@ QVector<Ticket> DatabaseManager::loadAllTickets(const QString& currentUsername, 
     QVector<Ticket> tickets;
     QSqlQuery query(db_);
 
-    // 👈 السطر ده بس اللي محتاجينه: هات كل التذاكر ورتبها بالوقت
     query.prepare("SELECT * FROM tickets ORDER BY sale_time DESC");
 
     if (!query.exec()) {
@@ -184,7 +183,16 @@ QVector<Ticket> DatabaseManager::loadAllTickets(const QString& currentUsername, 
         t.setQuantity(query.value("quantity").toInt());
         t.setTotalPrice(query.value("total_price").toDouble());
         t.setSaleTime(QDateTime::fromString(query.value("sale_time").toString(), "yyyy-MM-dd HH:mm:ss"));
-        t.setType(static_cast<TicketType>(query.value("type").toInt()));
+
+        // 🌟 التصليح هنا: قراءة النوع كنص وتحويله لـ Enum صح 🌟
+        QString typeStr = query.value("type").toString();
+        TicketType type;
+        if (typeStr == "Child" || typeStr == "أطفال") type = TicketType::CHILD;
+        else if (typeStr == "Family" || typeStr == "عائلة") type = TicketType::FAMILY;
+        else if (typeStr == "Student" || typeStr == "طالب") type = TicketType::STUDENT;
+        else type = TicketType::ADULT;
+
+        t.setType(type);
 
         tickets.append(t);
     }
