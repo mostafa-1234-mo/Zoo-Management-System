@@ -5,7 +5,6 @@
 #include <QLabel>    // تم إضافة مكتبة QLabel
 #include "animal.h"  // محتاجينه عشان enum HealthStatus
 #include "validator.h"
-
 namespace Ui {
 class AddAnimalDialog;
 }

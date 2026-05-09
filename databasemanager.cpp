@@ -187,9 +187,9 @@ QVector<Ticket> DatabaseManager::loadAllTickets(const QString& currentUsername, 
         // 🌟 التصليح هنا: قراءة النوع كنص وتحويله لـ Enum صح 🌟
         QString typeStr = query.value("type").toString();
         TicketType type;
-        if (typeStr == "Child" || typeStr == "أطفال") type = TicketType::CHILD;
-        else if (typeStr == "Family" || typeStr == "عائلة") type = TicketType::FAMILY;
-        else if (typeStr == "Student" || typeStr == "طالب") type = TicketType::STUDENT;
+        if (typeStr == "Child" ) type = TicketType::CHILD;
+        else if (typeStr == "Family" ) type = TicketType::FAMILY;
+        else if (typeStr == "Student" ) type = TicketType::STUDENT;
         else type = TicketType::ADULT;
 
         t.setType(type);
